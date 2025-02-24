@@ -1,7 +1,7 @@
 import { Flex, Button, Heading} from "@aws-amplify/ui-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from 'axios';
-import { CookiesProvider, useCookies } from "react-cookie";
+import { useCookies } from "react-cookie";
 
 
 export default function ConnectFour() {
