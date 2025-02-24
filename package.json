@@ -14,8 +14,11 @@
     "@fileforge/react-print": "^0.1.150",
     "aws-amplify": "^6.4.0",
     "axios": "^1.7.9",
+    "polygon": "^1.0.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-cookie": "^7.2.2",
+    "react-dom": "^18.2.0",
+    "svg": "^0.1.0"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.0.4",

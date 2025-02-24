@@ -1,26 +1,10 @@
-// import { useEffect, useState } from "react";
-// import type { Schema } from "../amplify/data/resource";
-// import { generateClient } from "aws-amplify/data";
-// import NavBarHeader from "./ui-components/NavBarHeader";
 import { Flex, Divider, Heading, View } from "@aws-amplify/ui-react";
 import '@aws-amplify/ui-react/styles.css';
 import NavBarHeader from "./ui-components/NavBarHeader";
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import ConnectFour from "./ConnectFour";
 
 function IntroTabs() {
-  const api_url = "https://082q4pe6xa.execute-api.us-east-2.amazonaws.com/Test"
-  const [data, setData] = useState('');
-  useEffect(() => {
-    axios.get(api_url + "/data")
-        .then(response => {
-            console.log(response);
-            setData(response.data.body);
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
-  }, []);
+
 
   return (
     <main>
@@ -113,8 +97,8 @@ function IntroTabs() {
           <p>the road, which can be used to detect the road condition.</p>
           <p>Paper Reference: <a href="https://mobisys20.hotcrp.com/doc/mobisys20-paper213.pdf?cap=0213a1iBFyBH1Pys">Link</a></p>
         </View>
-        <View id="Projects" className="tabnotcontent" style={{display: "none"}}>
-          <p>{data}</p>
+        <View id="Projects" className="tabcontent" style={{display: "none"}}>
+          <ConnectFour />
 
         </View>
       </Flex>

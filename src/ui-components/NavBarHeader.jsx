@@ -19,7 +19,7 @@ export default function NavBarHeader(props) {
     for (i = 0; i < tabcontent.length; i++) {
       tabcontent[i].style.display = "none";
     }
-
+    
     // Get all elements with class="tablinks" and remove the class "active"
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
@@ -110,7 +110,7 @@ export default function NavBarHeader(props) {
       >
         Research
       </Button>
-      {/* <Button
+      <Button
         fontFamily="Inter"
         fontSize="16px"
         fontWeight="400"
@@ -127,7 +127,7 @@ export default function NavBarHeader(props) {
         onClick={() => openTab(event, 'Projects')}
       >
         Projects
-      </Button> */}
+      </Button>
     </Flex>
     <Flex
       gap="32px"
