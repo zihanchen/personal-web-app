@@ -13,10 +13,10 @@ export default function ConnectFour() {
       const [board, setBoard] = useState([[]]);
       const [boardsize, setSize] = useState(0);
       const [cookies, setCookie] = useCookies(['uid']);
-      const [player, setPlayer] = useState(1)
       const [finishGame, setFinishGame] = useState(false)
       const CELL_SIZE = 45;
       const MARGIN = 5;
+      const player = 1;
 
       const Shape = ({ type, x, y }) => {
         switch (type) {
