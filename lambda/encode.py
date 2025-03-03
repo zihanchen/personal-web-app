@@ -63,9 +63,13 @@ def decode(num, size):
 if __name__ == "__main__":
     init(16)
 
-    
+     
     board[0][0] = 'x'
     board[0][5] = 'o'
+
+    for i in range(0, 16):
+        for j in range(0, 16):
+            board[i][j] = 'o'
 
     for line in board:
         print(line)

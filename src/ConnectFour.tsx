@@ -14,6 +14,7 @@ export default function ConnectFour() {
       const [boardsize, setSize] = useState(0);
       const [cookies, setCookie] = useCookies(['uid']);
       const [player, setPlayer] = useState(1)
+      const [finishGame, setFinishGame] = useState(false)
       const CELL_SIZE = 45;
       const MARGIN = 5;
 
@@ -51,25 +52,13 @@ export default function ConnectFour() {
         return (
           <div>
             {Array.from({ length: n }, (_, i) => i + 1).map((num) => (
-              <Button key={num} onClick={() => func(num)}>
+              <Button disabled={finishGame} key={num} onClick={() => func(num)}>
                 {num}
               </Button>
             ))}
           </div>
         );
       };
-
-      // useEffect(() => {
-      //   axios.get(api_url + "/data")
-      //       .then(response => {
-      //           console.log(response);
-      //           setData(response.data.body);
-                
-      //       })
-      //       .catch(error => {
-      //           console.error('Error fetching data:', error);
-      //       });
-      // }, []);
 
       function initBoard(size) {
         var setupButton, i;
@@ -92,16 +81,35 @@ export default function ConnectFour() {
 
       function makeMove(column) {
         console.log("trying to move")
-        console.log(column)
+        console.log(column);
+        setFinishGame(true);
         axios.post(gateway_url + "/connectfour/move", {
           'move': column,
           'uid': cookies.uid,
           'player': player
         })
         .then(response => {
-          console.log(response.data.board)
+          console.log("getting response")
+          console.log(response.data);
           setBoard(response.data.board)
-          setPlayer(0 - player)
+          var win_state = response.data.win_state;
+          if (win_state == 1) {
+            alert("You win!")
+            setFinishGame(true);
+          } else {
+            axios.post(gateway_url + "/connectfour/aimove", {
+              'uid': cookies.uid
+            })
+            .then(response2 => {
+              setBoard(response2.data.board)
+              win_state = response2.data.win_state
+              if (win_state == 1) {
+                alert("You lose!")
+                setFinishGame(true);
+              }
+              setFinishGame(false);
+            })
+          }
         })
       }
 
@@ -113,14 +121,6 @@ export default function ConnectFour() {
                 <Button className="selectBoard" onClick={() => initBoard(10)}>10 x 10</Button>
                 <Button className="selectBoard" onClick={() => initBoard(16)}>16 x 16</Button>
             </Flex>
-            {/* <Flex direction="column" gap="0.001rem"> 
-                {board.map((items) => {
-                  
-                  return <Flex direction="row" gap="1.3rem">{items.map((subItems) => {
-                    return <View>{subItems}</View>
-                  })}</Flex>;
-                })}
-            </Flex> */}
             <Board board={board} />
             <Flex direction="row">
               <ButtonGenerator n={boardsize} func={makeMove} />
